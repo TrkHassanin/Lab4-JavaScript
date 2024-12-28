@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide-show</title>
+    
+    <style> 
+    .images-container {
+        width: 450px;
+        height: 700px;
+        max-width: 100%;
+        position: relative;
+        border: 5px solid black;
+    } 
+    </style>
+    
+</head>
+<body>
+
+    <section id="images-container" class="images-container">
+        <div>
+            <img src="img1.webp" style="width:450px; height:700px;">
+        </div>
+    </section>
+
+    <script>
+        // array of images (src) to be changed between
+        let img_arr = ['img1.webp', 'img2.webp', 'img3.webp', 'img4.webp'];
+        let i = 0;
+        let slide;
+        const img_element = document.querySelector("#images-container img");
+        
+        // Function to start image slide show 
+        function SlideShow() {
+            // loop over the array and set the src attribute in the image to be arr[i]
+            img_element.src = img_arr[i];
+            
+            // increment i if it's less than the number of elements in the images array; if we reached the last element, set i to equal 0 and start from the beginning
+            if (i < img_arr.length - 1)
+                i++;
+            else
+                i = 0;
+
+            // Running the function SlideShow every 2 seconds
+            slide = setTimeout(SlideShow, 1000);
+        }
+
+        // function to stop the slide show and setting the image src to be img1
+        function StopSlideShow() {
+            clearTimeout(slide);
+            // Reset counter (i) to be 0
+            i = 0;
+            // Setting the image src to be img1 as default.
+            img_element.src = img_arr[0];
+        }
+
+        const images_container = document.getElementById("images-container");
+        images_container.addEventListener("mouseenter", SlideShow);
+        images_container.addEventListener("mouseleave" , StopSlideShow);
+
+    </script> 
+</body>
+</html>
